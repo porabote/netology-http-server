@@ -68,7 +68,7 @@ public class Request {
             this.queryParams = URLEncodedUtils.parse(uriSplits[1], StandardCharsets.UTF_8);
         }
 
-        //TODO delete this Exsample
+        //TODO delete this Exsample (some uri like /index.html?foo=1&bar=89)
         String fooValue = this.getQueryParam("bar");
         System.out.println(fooValue);
 
