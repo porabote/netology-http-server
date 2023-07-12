@@ -4,6 +4,7 @@ import request.Request;
 
 import java.io.*;
 import java.net.ServerSocket;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -23,7 +24,6 @@ public class Server {
                 try (
                         final var socket = serverSocket.accept();
                 ) {
-
                     final Request request = new Request(socket);
                     final var responseStream = new BufferedOutputStream(socket.getOutputStream());
 
@@ -39,6 +39,8 @@ public class Server {
                 } catch (ExecutionException e) {
                     throw new RuntimeException(e);
                 } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                } catch (URISyntaxException e) {
                     throw new RuntimeException(e);
                 }
             }
