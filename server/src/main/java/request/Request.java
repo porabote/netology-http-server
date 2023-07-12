@@ -68,6 +68,7 @@ public class Request {
             this.queryParams = URLEncodedUtils.parse(uriSplits[1], StandardCharsets.UTF_8);
         }
 
+        //TODO delete this Exsample
         String fooValue = this.getQueryParam("bar");
         System.out.println(fooValue);
 
