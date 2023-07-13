@@ -1,5 +1,5 @@
 import handler.Handler;
-import handler.HandlerCallable;
+import handler.HandlerRunnable;
 import request.Request;
 
 import java.io.*;
@@ -27,19 +27,22 @@ public class Server {
                     final Request request = new Request(socket);
                     final var responseStream = new BufferedOutputStream(socket.getOutputStream());
 
-                    HandlerCallable requestHandler = new HandlerCallable(request, responseStream, null);
+                    HandlerRunnable requestHandler;
+
                     String handlerKey = request.getHttpMethod() + ":" + request.getUri();
+
                     if (this.handlersList.containsKey(handlerKey)) {
-                        requestHandler = new HandlerCallable(request, responseStream, this.handlersList.get(handlerKey));
+                        requestHandler = new HandlerRunnable(request, responseStream, this.handlersList.get(handlerKey));
+                    } else {
+                        requestHandler = new HandlerRunnable(request, responseStream, null);
                     }
 
-                    final Future<String> task = threadPool.submit(requestHandler);
-                    task.get();
+                    threadPool.execute(new Thread(requestHandler));
+                    //threadPool.shutdown();
+                    if (!socket.isClosed()) {
+                        System.out.println("CLOSED");
+                    }
 
-                } catch (ExecutionException e) {
-                    throw new RuntimeException(e);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
                 } catch (URISyntaxException e) {
                     throw new RuntimeException(e);
                 }

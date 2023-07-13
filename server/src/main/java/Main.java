@@ -14,21 +14,17 @@ public class Main {
 
         // добавление хендлеров (обработчиков)
         server.addHandler("GET", "/messages", new Handler () {
-            public Object handle(Request request, BufferedOutputStream responseStream) throws IOException {
-
+            public void handle(Request request, BufferedOutputStream responseStream) throws IOException {
                 Response response = new Response(request, responseStream);
                 response.setTemplatePath("messages_override.html");
                 response.output();
-
-                return null;
             }
         });
         server.addHandler("POST", "/messages", new Handler() {
-            public Object handle(Request request, BufferedOutputStream responseStream) throws IOException {
+            public void handle(Request request, BufferedOutputStream responseStream) throws IOException {
                 Response response = new Response(request, responseStream);
                 response.setTemplatePath("messages_override_form.html");
                 response.output();
-                return null;
             }
         });
 

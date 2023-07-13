@@ -52,7 +52,7 @@ public class Request {
     }
     
     private void parseRequest(String requestLine) throws IOException, URISyntaxException {
-
+        System.out.println(requestLine);
         this.out = new BufferedOutputStream(socket.getOutputStream());
 
         final var parts = requestLine.split(" ");
@@ -69,8 +69,8 @@ public class Request {
         }
 
         //TODO delete this Exsample (some uri like /index.html?foo=1&bar=89)
-        String fooValue = this.getQueryParam("bar");
-        System.out.println(fooValue);
+//        String fooValue = this.getQueryParam("bar");
+//        System.out.println(fooValue);
 
         if (parts.length != 3) {
             throw new IOException("Missed request part");
