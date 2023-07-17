@@ -38,25 +38,12 @@ public class Server {
                 }
                 Thread responseHandle = new Thread(requestHandler);
                 threadPool.execute(responseHandle);
-                //threadPool.shutdown();
-//                responseHandle.join();
-//                if (!socket.isClosed()) {
-//                    System.out.println("CLOSED");
-//                }
 
-//            } catch(URISyntaxException e){
-//                throw new RuntimeException(e);
-//            }
-//            catch(InterruptedException e){
-//                throw new RuntimeException(e);
-//            }
-        }
-    } catch(
-    IOException e)
-
-    {
-        e.printStackTrace();
-    } catch (URISyntaxException e) {
+            }
+        } catch (
+                IOException e) {
+            e.printStackTrace();
+        } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
 
